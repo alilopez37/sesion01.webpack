@@ -28,12 +28,25 @@ class Login extends React.Component{
             data => {
                 //Primera forma de obtener la referencia de un control en el DOM
                 //let label = document.getElementById('usernameMessage')
-                this.label.innerHTML = data.message
+                this.label.innerHTML = ''
             },
             error => {
                 //let label = document.getElementById('usernameMessage')
-                this.label.innerHTML = error.message
+                this.label.innerHTML = 'La cuenta de usuario no existe'
             })
+    }
+
+    iniciarSesion(e){
+        let user = {
+            username: this.state.username,
+            password: this.state.password
+        }
+
+        APIInvoker.invokePOST('/users/login',user,data => {
+            alert('Bienvenido al sistema')
+        }, error =>{
+            this.pass.innerHTML = error.message
+        })
     }
 
     render() {
@@ -49,8 +62,7 @@ class Login extends React.Component{
                                value={this.state.username}
                                onChange={this.changeField.bind(this)}
                                onBlur={this.usernameValidate.bind(this)}/>
-
-                               <div ref={ self => this.label = self}></div>
+                               <div className="label-error" ref={ self => this.label = self}></div>
 
                             <label htmlFor="password">Contraseña</label>
                             <input type="password"
@@ -59,8 +71,8 @@ class Login extends React.Component{
                                    placeholder="1234"
                                    value={this.state.password}
                                    onChange={this.changeField.bind(this)}/>
-                            <div ref={ self => this.pass = self}> </div>
-                            <button type="button" >Iniciar sesión</button>
+                            <div className="label-error" ref={ self => this.pass = self}> </div>
+                            <button type="button" onClick={this.iniciarSesion.bind(this)} >Iniciar sesión</button>
                     </form>
                 </div>
         )

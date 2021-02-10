@@ -1,14 +1,3 @@
-.box-login {
-    background-color: #5B6064;
-    color: white;
-}
-
-#img-login {
-    width: 30%;
-}
-
-#container-login {
-    border: red solid 1px;
-    background-color: #474672;
-    color: white;
+.label-error {
+    color: red;
 }
