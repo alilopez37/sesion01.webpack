@@ -3,7 +3,6 @@ import update from 'immutability-helper'
 import APIInvoker from "./utils/APIInvoker";
 
 class Login extends React.Component{
-
     constructor() {
         super();
         this.state = {
@@ -54,7 +53,7 @@ class Login extends React.Component{
                 <div>
                     <h1>Prácticas profesionales</h1>
                     <form >
-                        <label htmlFor="username" >Nombre de usuario</label>
+                        <label htmlFor="username">Nombre de usuario</label>
                         <input type="text"
                                name="username"
                                id="username"
@@ -77,8 +76,6 @@ class Login extends React.Component{
                 </div>
         )
     }
-
-
 }
 
 export default Login;
