@@ -42,7 +42,8 @@ class Login extends React.Component{
         }
 
         APIInvoker.invokePOST('/users/login',user,data => {
-            alert('Bienvenido al sistema')
+            alert(JSON.stringify(data))
+            window.localStorage.setItem('token',data.token)
         }, error =>{
             this.pass.innerHTML = error.message
         })
@@ -53,16 +54,19 @@ class Login extends React.Component{
                 <div>
                     <h1>Prácticas profesionales</h1>
                     <form >
-                        <label htmlFor="username">Nombre de usuario</label>
-                        <input type="text"
-                               name="username"
-                               id="username"
-                               placeholder="alilopez"
-                               value={this.state.username}
-                               onChange={this.changeField.bind(this)}
-                               onBlur={this.usernameValidate.bind(this)}/>
-                               <div className="label-error" ref={ self => this.label = self}></div>
+                        <div>
+                            <label htmlFor="username">Nombre de usuario</label>
+                            <input type="text"
+                                   name="username"
+                                   id="username"
+                                   placeholder="alilopez"
+                                   value={this.state.username}
+                                   onChange={this.changeField.bind(this)}
+                                   onBlur={this.usernameValidate.bind(this)}/>
+                            <div className="label-error" ref={ self => this.label = self}></div>
+                        </div>
 
+                        <div>
                             <label htmlFor="password">Contraseña</label>
                             <input type="password"
                                    name="password"
@@ -71,7 +75,9 @@ class Login extends React.Component{
                                    value={this.state.password}
                                    onChange={this.changeField.bind(this)}/>
                             <div className="label-error" ref={ self => this.pass = self}> </div>
-                            <button type="button" onClick={this.iniciarSesion.bind(this)} >Iniciar sesión</button>
+                        </div>
+                        <button type="button" onClick={this.iniciarSesion.bind(this)} >Iniciar sesión</button>
+
                     </form>
                 </div>
         )

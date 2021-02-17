@@ -7,7 +7,7 @@ class SignUp extends React.Component {
     constructor() {
         super()
         this.state  = {
-            idRol : '',
+            idRol : '1',
             nombre : '',
             apellidoPaterno : '',
             username : '',
@@ -55,8 +55,8 @@ class SignUp extends React.Component {
             APIInvoker.invokePOST('/users/signup',user,data=>{
                 alert(data.message)
                 this.usernameOk = false
-            }, error=>{
-                alert(data.message + data.error)
+            }, error => {
+                alert(error.message + error.error)
             })
         } else
             this.messageError.innerHTML = 'Los campos marcados con * son obligatorios'
@@ -99,23 +99,21 @@ class SignUp extends React.Component {
             this.status = false
         else
             this.status = true
-
     }
 
     render(){
         return (
             <div>
                 <h1>Registro de usuarios</h1>
-                <form>
+                <form onSubmit={this.crearCuenta.bind(this)}>
                     <div>
                         <label htmlFor='idRol'>Tipo de usuario</label>
-                        <input type='text'
-                               id='idRol'
-                               name='idRol'
-                               placeholder='1'
-                               value={this.state.idRol}
-                               onChange={this.changeField.bind(this)}/>
-                               <label ref={self=> this.idrRol = self}></label>
+                        <select name="idRol" id="idRol" value={this.state.idRol} onChange={this.changeField.bind(this)}>
+                            <option value="1">Alumno</option>
+                            <option value="2">Director</option>
+                            <option value="3">Asesor Académico</option>
+                        </select>
+                        <label ref={self=> this.idrRol = self}></label>
                     </div>
                     <div>
                         <label htmlFor='nombre'>Nombre</label>
@@ -125,7 +123,7 @@ class SignUp extends React.Component {
                                placeholder='Alí Santiago'
                                value={this.state.nombre}
                                onChange={this.changeField.bind(this)}/>
-                               <label ref={self=> this.nombre = self}></label>
+                        <label ref={self=> this.nombre = self}></label>
                     </div>
                     <div>
                         <label htmlFor='apellidoPaterno'>Apellido paterno</label>
@@ -135,7 +133,7 @@ class SignUp extends React.Component {
                                 placeholder='López'
                                 value={this.state.apellidoPaterno}
                                 onChange={this.changeField.bind(this)}/>
-                                <label ref={self=> this.apellidoPaterno = self}></label>
+                        <label ref={self=> this.apellidoPaterno = self}></label>
                     </div>
                     <div>
                         <label htmlFor='username'>Nombre de usuario</label>
@@ -147,7 +145,7 @@ class SignUp extends React.Component {
                                 ref={self => this.inputUsername = self}
                                 onChange={this.changeField.bind(this)}
                                 onBlur={this.validateUsername.bind(this)}/>
-                                <label ref={self=> this.username = self}></label>
+                        <label ref={self=> this.username = self}></label>
                     </div>
                     <div>
                         <label htmlFor='password'>Contraseña</label>
@@ -157,7 +155,7 @@ class SignUp extends React.Component {
                                 placeholder='LgfclR3c0rd4r'
                                 value={this.state.password}
                                 onChange={this.changeField.bind(this)}/>
-                                <label ref={self=> this.password = self}></label>
+                        <label ref={self=> this.password = self}></label>
                     </div>
 
                     <button
