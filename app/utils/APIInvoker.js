@@ -28,7 +28,6 @@ class APIInvoker {
     }
 
     invokePOST(url, body, okCallbak, failCallback){
-        console.log('body ==>',body)
         let params = {
             method: 'POST',
             headers: this.getAPIHeader(),
@@ -43,10 +42,8 @@ class APIInvoker {
             console.log('Invoke => ' + params.method + ':' + url)
             console.log (params.body)
         }
-
         fetch(`${configuration.api.host}${url}`,params)
             .then(response => {
-                console.log("response:" + JSON.stringify(response))
                 if (debug){
                     console.log('Invoke Response =>')
                     console.log (response)
@@ -54,7 +51,6 @@ class APIInvoker {
                 return response.json()
             })
             .then(data => {
-                console.log("data :" + JSON.stringify(data))
                 if (data.status)
                     okCallback(data)
                 else

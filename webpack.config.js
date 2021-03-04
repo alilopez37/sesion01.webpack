@@ -1,12 +1,11 @@
-var path = require('path');
+const path = require('path'); //formato commonJs
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    mode: 'development',
     entry: './app/index.js',
     output: {
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: "/public"
     },
     module: {
         rules: [
@@ -23,7 +22,39 @@ module.exports = {
                         ]
                     }
                 }
+            },  //Babel Loader
+            {
+                test: /\.(png|gif|jpg|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'assets/[hash].[ext]'
+                        }
+                    }
+
+                ]
+            },  //Loader imágenes
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: "html-loader",
+                    }
+                ]
             }
         ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './index.html',
+            filename: "index.html"
+        }),
+    ],
+    devServer: {
+        historyApiFallback : true,
+        contentBase: path.join(__dirname, "dist"),
+        compress: true,
+        port: 8000,
     }
 }

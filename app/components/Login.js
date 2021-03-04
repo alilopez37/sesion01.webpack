@@ -1,6 +1,7 @@
 import React from 'react'
 import update from 'immutability-helper'
-import APIInvoker from "./utils/APIInvoker";
+import APIInvoker from "../utils/APIInvoker";
+
 
 class Login extends React.Component{
     constructor() {
@@ -42,8 +43,9 @@ class Login extends React.Component{
         }
 
         APIInvoker.invokePOST('/users/login',user,data => {
-            alert(JSON.stringify(data))
+            console.log('iniciarsesion => llegué')
             window.localStorage.setItem('token',data.token)
+            this.props.history.push('/main')
         }, error =>{
             this.pass.innerHTML = error.message
         })

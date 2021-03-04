@@ -1,5 +1,5 @@
 import React from 'react'
-import APIInvoker from "./utils/APIInvoker";
+import APIInvoker from "../utils/APIInvoker";
 import update from 'immutability-helper'
 
 class SignUp extends React.Component {
