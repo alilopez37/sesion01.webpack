@@ -7,14 +7,24 @@ class SignUp extends React.Component {
     constructor() {
         super()
         this.state  = {
-            idRol : '1',
+            idRol : '',
             nombre : '',
             apellidoPaterno : '',
             username : '',
-            password : ''
+            password : '',
+            rolList: []
         }
         this.status = false
         this.usernameOk = false
+        this.rolList = []
+        //Extraer el catálogo de roles del backend
+        APIInvoker.invokeGET('/roles/getAllRoles',data => {  //Entrará acá cuando status = true
+            this.setState({
+                rolList : data.data
+            })
+            console.log(this.state.rolList)
+        }, error => { //Entrará acá cuando status = false
+        })
     }
 
     changeField(e) {
@@ -109,9 +119,10 @@ class SignUp extends React.Component {
                     <div>
                         <label htmlFor='idRol'>Tipo de usuario</label>
                         <select name="idRol" id="idRol" value={this.state.idRol} onChange={this.changeField.bind(this)}>
-                            <option value="1">Alumno</option>
-                            <option value="2">Director</option>
-                            <option value="3">Asesor Académico</option>
+                            <For each="item" index="idx" of={ this.state.rolList }>
+                                <option key={idx} value={item.idRol}>{item.rol}</option>
+                            </For>
+
                         </select>
                         <label ref={self=> this.idrRol = self}></label>
                     </div>

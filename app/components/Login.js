@@ -42,8 +42,8 @@ class Login extends React.Component{
             password: this.state.password
         }
 
+        http://localhost:3000/users/login
         APIInvoker.invokePOST('/users/login',user,data => {
-            console.log('iniciarsesion => llegué')
             window.localStorage.setItem('token',data.token)
             this.props.history.push('/main')
         }, error =>{
