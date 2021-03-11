@@ -1,6 +1,7 @@
 const path = require('path'); //formato commonJs
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+
 module.exports = {
     entry: './app/index.js',
     output: {
@@ -42,7 +43,7 @@ module.exports = {
                         loader: "html-loader",
                     }
                 ]
-            }
+            },
         ]
     },
     plugins: [

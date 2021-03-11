@@ -16,13 +16,11 @@ class SignUp extends React.Component {
         }
         this.status = false
         this.usernameOk = false
-        this.rolList = []
         //Extraer el catálogo de roles del backend
         APIInvoker.invokeGET('/roles/getAllRoles',data => {  //Entrará acá cuando status = true
             this.setState({
                 rolList : data.data
             })
-            console.log(this.state.rolList)
         }, error => { //Entrará acá cuando status = false
         })
     }
