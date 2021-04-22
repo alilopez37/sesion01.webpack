@@ -9,6 +9,11 @@ class APIInvoker {
             authorization: window.localStorage.getItem('token')
         })
     }
+    getAPIHeaderImg(){
+        return({
+            authorization: window.localStorage.getItem('token')
+        })
+    }
 
     invokeGET(url, okCallback, failCallback){
         let params = {
@@ -36,6 +41,17 @@ class APIInvoker {
 
         this.invoke(url,okCallbak,failCallback,params)
     }
+    ///----
+    invokePOSTimg(url, body, okCallbak, failCallback){
+        let params = {
+            method: 'POST',
+            headers: this.getAPIHeaderImg(),
+            body: body
+        }
+
+        this.invoke(url,okCallbak,failCallback,params)
+    }
+    ////----
     invokeDELETE(url, body, okCallbak, failCallback){
         let params = {
             method: 'DELETE',

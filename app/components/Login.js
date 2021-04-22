@@ -42,9 +42,10 @@ class Login extends React.Component{
             password: this.state.password
         }
 
-        http://localhost:3000/users/login
+
         APIInvoker.invokePOST('/users/login',user,data => {
             window.localStorage.setItem('token',data.token)
+            window.localStorage.setItem('idRol',data.rol)
             this.props.history.push('/main')
         }, error =>{
             this.pass.innerHTML = error.message
